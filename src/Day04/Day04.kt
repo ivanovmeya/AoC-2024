@@ -103,8 +103,6 @@ fun main() {
     part2(input).println()
 }
 
-data class Cell(val r: Int, val c: Int)
-
 enum class Direction {
     HORIZONTAL,
     VERTICAL,
