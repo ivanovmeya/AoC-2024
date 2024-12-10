@@ -1,5 +1,3 @@
-import java.math.BigInteger
-
 fun main() {
 
     fun parse(input: List<String>): MutableList<Int> {
