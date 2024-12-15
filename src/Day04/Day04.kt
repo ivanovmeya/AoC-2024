@@ -7,7 +7,7 @@ fun main() {
 
         val globalPaths = HashSet<Pair<Int, Int>>()
 
-        fun dfs(r: Int, c: Int, i: Int, d: Direction): Boolean {
+        fun dfs(r: Int, c: Int, i: Int, d: Directions): Boolean {
             if (i == word.length) {
                 globalPaths.addAll(path)
                 return true
@@ -20,10 +20,10 @@ fun main() {
 
             path.add(Pair(r, c))
             val res = when (d) {
-                Direction.HORIZONTAL -> dfs(r, c + 1, i + 1, d)
-                Direction.VERTICAL -> dfs(r + 1, c, i + 1, d)
-                Direction.LEFT_RIGHT_DIAGONAL -> dfs(r - 1, c - 1, i + 1, d)
-                Direction.RIGHT_LEFT_DIAGONAL -> dfs(r - 1, c + 1, i + 1, d)
+                Directions.HORIZONTAL -> dfs(r, c + 1, i + 1, d)
+                Directions.VERTICAL -> dfs(r + 1, c, i + 1, d)
+                Directions.LEFT_RIGHT_DIAGONAL -> dfs(r - 1, c - 1, i + 1, d)
+                Directions.RIGHT_LEFT_DIAGONAL -> dfs(r - 1, c + 1, i + 1, d)
             }
             path.remove(Pair(r, c))
 
@@ -33,10 +33,10 @@ fun main() {
         var count = 0
         for (r in 0 until rows) {
             for (c in 0 until cols) {
-                if (dfs(r, c, 0, Direction.HORIZONTAL)) count++
-                if (dfs(r, c, 0, Direction.VERTICAL)) count++
-                if (dfs(r, c, 0, Direction.LEFT_RIGHT_DIAGONAL)) count++
-                if (dfs(r, c, 0, Direction.RIGHT_LEFT_DIAGONAL)) count++
+                if (dfs(r, c, 0, Directions.HORIZONTAL)) count++
+                if (dfs(r, c, 0, Directions.VERTICAL)) count++
+                if (dfs(r, c, 0, Directions.LEFT_RIGHT_DIAGONAL)) count++
+                if (dfs(r, c, 0, Directions.RIGHT_LEFT_DIAGONAL)) count++
             }
         }
 
@@ -103,7 +103,7 @@ fun main() {
     part2(input).println()
 }
 
-enum class Direction {
+enum class Directions {
     HORIZONTAL,
     VERTICAL,
     LEFT_RIGHT_DIAGONAL,
