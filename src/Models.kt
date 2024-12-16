@@ -17,5 +17,4 @@ data class Cell(val r: Int, val c: Int) {
 
 data class Point(val x: Long, val y: Long)
 
-
-data class PointInt(val x: Int, val y: Int)
+data class PointInt(var x: Int, var y: Int)
