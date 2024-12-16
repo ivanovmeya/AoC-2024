@@ -21,6 +21,28 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
  */
 fun Any?.println() = println(this)
 
+fun <T> List<List<T>>.print() {
+    for (i in this.indices) {
+        if (this[i].isNotEmpty()) {
+            for (j in this[i].indices) {
+                print("${this[i][j]}")
+            }
+            kotlin.io.println()
+        }
+    }
+}
+
+fun List<String>.printList() {
+    for (i in this.indices) {
+        if (this[i].isNotEmpty()) {
+            for (j in this[i].indices) {
+                print("${this[i][j]}")
+            }
+            kotlin.io.println()
+        }
+    }
+}
+
 
 fun Cell.inbounds(input: List<List<Char>>): Boolean {
     val cell = this
@@ -58,3 +80,5 @@ enum class Direction(val dx: Int, val dy: Int) {
         }
     }
 }
+
+
