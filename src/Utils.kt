@@ -58,12 +58,14 @@ fun directions(): List<Pair<Int, Int>> {
     )
 }
 
-enum class Direction(val dx: Int, val dy: Int) {
+enum class Direction(val dr: Int, val dc: Int) {
     RIGHT(0, 1),
     DOWN(1, 0),
     LEFT(0, -1),
-    TOP(-1, 0);
+    UP(-1, 0);
 
+//    private val map = entries.associateBy { it.dr to it.dc }
+//    operator fun get(dr: Int, dc: Int) = map[dr to dc]
 
     companion object {
         fun all() = entries.toList()
@@ -74,10 +76,38 @@ enum class Direction(val dx: Int, val dy: Int) {
                 dx == 0 && dy == 1 -> RIGHT
                 dx == 1 && dy == 0 -> DOWN
                 dx == 0 && dy == -1 -> LEFT
-                dx == -1 && dy == 0 -> TOP
-                else -> { throw IllegalArgumentException("Unknown directions")}
+                dx == -1 && dy == 0 -> UP
+                else -> {
+                    throw IllegalArgumentException("Unknown directions")
+                }
             }
         }
+
+        fun Direction.clockwise(): Direction {
+            return when(this){
+                RIGHT -> DOWN
+                DOWN -> LEFT
+                LEFT -> UP
+                UP -> RIGHT
+            }
+        }
+
+        fun Direction.counterclockwise(): Direction {
+            return when(this){
+                RIGHT -> UP
+                DOWN -> RIGHT
+                LEFT -> DOWN
+                UP -> LEFT
+            }
+        }
+
+//        fun Direction.clockwise(): Direction {
+//            return this[dc, -dr]!!
+//        }
+//
+//        fun Direction.counterclockwise(): Direction {
+//            return this[-dc, dc]!!
+//        }
     }
 }
 

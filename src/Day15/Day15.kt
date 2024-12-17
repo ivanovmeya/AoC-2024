@@ -60,8 +60,8 @@ fun main() {
 
     fun move(r: PointInt, d: Direction, map: MutableList<MutableList<Char>>) {
         //try to move robot, check surroundings,
-        val newX = r.x + d.dx
-        val newY = r.y + d.dy
+        val newX = r.x + d.dr
+        val newY = r.y + d.dc
 
         val ch = map[newX][newY]
 
@@ -78,12 +78,12 @@ fun main() {
             'O' -> {
                 //Fun begins here
                 //now we need to check surroundings of this 0 in same direction, until we found empty space, or #
-                var x = newX + d.dx
-                var y = newY + d.dy
+                var x = newX + d.dr
+                var y = newY + d.dc
 
                 while (map[x][y] != '#' && map[x][y] != '.') {
-                    x += d.dx
-                    y += d.dy
+                    x += d.dr
+                    y += d.dc
                 }
 
                 //if we found
@@ -108,11 +108,11 @@ fun main() {
     ): Boolean {
 
         //check below
-        val p1Xn = box.p1.x + d.dx
-        val p1Yn = box.p1.y + d.dy
+        val p1Xn = box.p1.x + d.dr
+        val p1Yn = box.p1.y + d.dc
 
-        val p2Xn = box.p2.x + d.dx
-        val p2Yn = box.p2.y + d.dy
+        val p2Xn = box.p2.x + d.dr
+        val p2Yn = box.p2.y + d.dc
 
         if (map[p1Xn][p1Yn] == '#' || map[p2Xn][p2Yn] == '#') return false
 
@@ -148,8 +148,8 @@ fun main() {
 
     fun move2(r: PointInt, d: Direction, map: MutableList<MutableList<Char>>) {
         //try to move robot, check surroundings,
-        val newX = r.x + d.dx
-        val newY = r.y + d.dy
+        val newX = r.x + d.dr
+        val newY = r.y + d.dc
 
         when (val ch = map[newX][newY]) {
             '.' -> {
@@ -163,7 +163,7 @@ fun main() {
 
             '[', ']' -> {
                 when (d) {
-                    Direction.TOP, Direction.DOWN -> {
+                    Direction.UP, Direction.DOWN -> {
 
                         val targets = hashSetOf<Box>()
 
@@ -182,11 +182,11 @@ fun main() {
                             r.y = newY
 
                             val sortedTargets = targets.sortedBy { it.p1.x }
-                            val pTargets = if (d == Direction.TOP) sortedTargets else sortedTargets.reversed()
+                            val pTargets = if (d == Direction.UP) sortedTargets else sortedTargets.reversed()
                             //moving
                             for (t in pTargets) {
-                                val p1 = PointInt(t.p1.x + d.dx, t.p1.y + d.dy)
-                                val p2 = PointInt(t.p2.x + d.dx, t.p2.y + d.dy)
+                                val p1 = PointInt(t.p1.x + d.dr, t.p1.y + d.dc)
+                                val p2 = PointInt(t.p2.x + d.dr, t.p2.y + d.dc)
 
                                 //move
                                 map[p1.x][p1.y] = t.ch1
@@ -201,12 +201,12 @@ fun main() {
                     }
 
                     Direction.LEFT, Direction.RIGHT -> {
-                        var x = newX + 2 * d.dx
-                        var y = newY + 2 * d.dy
+                        var x = newX + 2 * d.dr
+                        var y = newY + 2 * d.dc
 
                         while (map[x][y] != '#' && map[x][y] != '.') {
-                            x += d.dx
-                            y += d.dy
+                            x += d.dr
+                            y += d.dc
                         }
 
                         //if we found
@@ -220,14 +220,14 @@ fun main() {
 
                             //we start at newX,newY and finish at x,y in direction d
 
-                            if (d.dy > 0) {
+                            if (d.dc > 0) {
                                 //going right
-                                for (i in y downTo newY + d.dy) {
-                                    map[x][i] = map[x][i - d.dy]
+                                for (i in y downTo newY + d.dc) {
+                                    map[x][i] = map[x][i - d.dc]
                                 }
                             } else {
-                                for (i in y..newY + d.dy) {
-                                    map[x][i] = map[x][i - d.dy]
+                                for (i in y..newY + d.dc) {
+                                    map[x][i] = map[x][i - d.dc]
                                 }
                             }
 
@@ -245,7 +245,7 @@ fun main() {
 
         commands.forEach { c ->
             val dir = when (c) {
-                '^' -> Direction.TOP
+                '^' -> Direction.UP
                 '>' -> Direction.RIGHT
                 'v' -> Direction.DOWN
                 '<' -> Direction.LEFT
@@ -281,7 +281,7 @@ fun main() {
 
         commands.forEach { c ->
             val dir = when (c) {
-                '^' -> Direction.TOP
+                '^' -> Direction.UP
                 '>' -> Direction.RIGHT
                 'v' -> Direction.DOWN
                 '<' -> Direction.LEFT

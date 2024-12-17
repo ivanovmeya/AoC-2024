@@ -144,13 +144,13 @@ fun sidesFromEdges(edges: HashSet<Edge>): Int {
         //looks at 4 sides for this edge -- continue until we found all adjacent ones
         for (dir in Direction.all()) {
 
-            var nextEdge = Edge(e.row + dir.dx, e.col + dir.dy, e.dir)
+            var nextEdge = Edge(e.row + dir.dr, e.col + dir.dc, e.dir)
 
             //Check if this edge is in the edges itself
             while (edges.contains(nextEdge) && e.isAdjacent(nextEdge)) {
                 visited.add(nextEdge)
                 e = nextEdge
-                nextEdge = Edge(nextEdge.row + dir.dx, nextEdge.col + dir.dy, nextEdge.dir)
+                nextEdge = Edge(nextEdge.row + dir.dr, nextEdge.col + dir.dc, nextEdge.dir)
             }
         }
     }
@@ -176,7 +176,7 @@ fun edgesInRegion(region: List<Cell>, map: List<List<Char>>): HashSet<Edge> {
         //check surroundings
         for (dir in Direction.all()) {
             //if there are an edge between current plantCell and next one in that direction
-            val nextPlantCell = Cell(plantCell.r + dir.dx, plantCell.c + dir.dy)
+            val nextPlantCell = Cell(plantCell.r + dir.dr, plantCell.c + dir.dc)
             val nextPlant = map.tryGetCell(nextPlantCell.r, nextPlantCell.c)
 
             //different plant or outbounds and null
