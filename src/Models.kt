@@ -15,6 +15,6 @@ data class Cell(val r: Int, val c: Int) {
     }
 }
 
-data class Point(val x: Long, val y: Long)
+data class PointLong(val x: Long, val y: Long)
 
-data class PointInt(var x: Int, var y: Int)
+data class Point(var x: Int, var y: Int)

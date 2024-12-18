@@ -7,7 +7,7 @@ fun main() {
                 val (xStr, yStr) = line.split(",")
                 val dx = xStr.substring(xStr.indexOfFirst { it.isDigit() }).trim().toInt()
                 val dy = yStr.substring(yStr.indexOfFirst { it.isDigit() }).trim().toInt()
-                Point(dx.toLong(), dy.toLong())
+                PointLong(dx.toLong(), dy.toLong())
             }
             Game(
                 a = a,
@@ -52,7 +52,7 @@ fun main() {
             Game(
                 game.a,
                 game.b,
-                Point(game.prize.x + 10000000000000, game.prize.y + 10000000000000)
+                PointLong(game.prize.x + 10000000000000, game.prize.y + 10000000000000)
             )
         }
         return calcTokens(bigGames)
@@ -69,7 +69,7 @@ fun main() {
     part2(input).println()
 }
 
-data class Game(val a: Point, val b: Point, val prize: Point) {
+data class Game(val a: PointLong, val b: PointLong, val prize: PointLong) {
     override fun toString(): String {
         return "A:(${a.x},${a.y}); B:(${b.x},${b.y}); Prize = (${prize.x},${prize.y})"
     }

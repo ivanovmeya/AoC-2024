@@ -1,8 +1,8 @@
 fun main() {
 
-    fun parse(input: List<String>): Triple<PointInt, MutableList<MutableList<Char>>, List<Char>> {
+    fun parse(input: List<String>): Triple<Point, MutableList<MutableList<Char>>, List<Char>> {
 
-        var robot = PointInt(0, 0)
+        var robot = Point(0, 0)
         val map = mutableListOf<MutableList<Char>>()
         val commands = mutableListOf<Char>()
 
@@ -16,7 +16,7 @@ fun main() {
                 if (i < emptyIndex) {
                     //parse map
                     if (ch == '@') {
-                        robot = PointInt(i, j)
+                        robot = Point(i, j)
                         map[i].add('.')
                     } else {
                         map[i].add(ch)
@@ -58,7 +58,7 @@ fun main() {
         return list
     }
 
-    fun move(r: PointInt, d: Direction, map: MutableList<MutableList<Char>>) {
+    fun move(r: Point, d: Direction, map: MutableList<MutableList<Char>>) {
         //try to move robot, check surroundings,
         val newX = r.x + d.dr
         val newY = r.y + d.dc
@@ -124,9 +124,9 @@ fun main() {
             val p1ShiftY = if (map[p1Xn][p1Yn] == '[') +1 else -1
             val y = p1Yn + p1ShiftY
             val newBox1 = if (map[p1Xn][p1Yn] == '[') {
-                Box(map[p1Xn][p1Yn], PointInt(p1Xn, p1Yn), map[p1Xn][y], PointInt(p1Xn, y))
+                Box(map[p1Xn][p1Yn], Point(p1Xn, p1Yn), map[p1Xn][y], Point(p1Xn, y))
             } else {
-                Box(map[p1Xn][y], PointInt(p1Xn, y), map[p1Xn][p1Yn], PointInt(p1Xn, p1Yn))
+                Box(map[p1Xn][y], Point(p1Xn, y), map[p1Xn][p1Yn], Point(p1Xn, p1Yn))
             }
 
             isMovable(newBox1, d, map, targets)
@@ -136,9 +136,9 @@ fun main() {
             val p2ShiftY = if (map[p2Xn][p2Yn] == '[') +1 else -1
             val y = p2Yn + p2ShiftY
             val newBox2 = if (map[p2Xn][p2Yn] == '[') {
-                Box(map[p2Xn][p2Yn], PointInt(p2Xn, p2Yn), map[p2Xn][y], PointInt(p2Xn, y))
+                Box(map[p2Xn][p2Yn], Point(p2Xn, p2Yn), map[p2Xn][y], Point(p2Xn, y))
             } else {
-                Box(map[p2Xn][y], PointInt(p2Xn, y), map[p2Xn][p2Yn], PointInt(p2Xn, p2Yn))
+                Box(map[p2Xn][y], Point(p2Xn, y), map[p2Xn][p2Yn], Point(p2Xn, p2Yn))
             }
             isMovable(newBox2, d, map, targets)
         } else true
@@ -146,7 +146,7 @@ fun main() {
         return isLeft && isRight
     }
 
-    fun move2(r: PointInt, d: Direction, map: MutableList<MutableList<Char>>) {
+    fun move2(r: Point, d: Direction, map: MutableList<MutableList<Char>>) {
         //try to move robot, check surroundings,
         val newX = r.x + d.dr
         val newY = r.y + d.dc
@@ -171,9 +171,9 @@ fun main() {
                         val y = newY + shiftY
 
                         val box = if (ch == '[') {
-                            Box(ch, PointInt(newX, newY), map[newX][y], PointInt(newX, y))
+                            Box(ch, Point(newX, newY), map[newX][y], Point(newX, y))
                         } else{
-                            Box(map[newX][y], PointInt(newX, y), ch, PointInt(newX, newY))
+                            Box(map[newX][y], Point(newX, y), ch, Point(newX, newY))
                         }
 
                         if (isMovable(box, d, map, targets)) {
@@ -185,8 +185,8 @@ fun main() {
                             val pTargets = if (d == Direction.UP) sortedTargets else sortedTargets.reversed()
                             //moving
                             for (t in pTargets) {
-                                val p1 = PointInt(t.p1.x + d.dr, t.p1.y + d.dc)
-                                val p2 = PointInt(t.p2.x + d.dr, t.p2.y + d.dc)
+                                val p1 = Point(t.p1.x + d.dr, t.p1.y + d.dc)
+                                val p2 = Point(t.p2.x + d.dr, t.p2.y + d.dc)
 
                                 //move
                                 map[p1.x][p1.y] = t.ch1
@@ -319,4 +319,4 @@ fun main() {
 }
 
 
-data class Box(val ch1: Char, val p1: PointInt, val ch2: Char, val p2: PointInt)
+data class Box(val ch1: Char, val p1: Point, val ch2: Char, val p2: Point)

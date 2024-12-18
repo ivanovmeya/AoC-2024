@@ -6,7 +6,7 @@ fun main() {
             val (x, y) = pS.substringAfter("=").trim().split(",").map { it.trim().toInt() }
             val (dx, dy) = vS.substringAfter("=").trim().split(",").map { it.trim().toInt() }
 
-            Robot(PointInt(x, y), Velocity(dx, dy))
+            Robot(Point(x, y), Velocity(dx, dy))
         }
     }
 
@@ -115,5 +115,5 @@ fun main() {
 
 data class Velocity(val dx: Int, val dy: Int)
 
-data class Robot(val p: PointInt, val v: Velocity)
+data class Robot(val p: Point, val v: Velocity)
 

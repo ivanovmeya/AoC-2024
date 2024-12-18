@@ -43,6 +43,14 @@ fun List<String>.printList() {
     }
 }
 
+fun Array<CharArray>.print() {
+    for (i in this.indices) {
+        for (j in this[0].indices) {
+            print("${this[i][j]}")
+        }
+        println()
+    }
+}
 
 fun Cell.inbounds(input: List<List<Char>>): Boolean {
     val cell = this
