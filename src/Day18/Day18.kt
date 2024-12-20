@@ -78,7 +78,6 @@ fun main() {
 
         val (map, bytes) = parse2(input, size, initialBytes)
 
-
         for (byte in bytes) {
             map[byte.y][byte.x] = '#'
             if (bfs(0, 0, map) == 0) {
@@ -96,6 +95,5 @@ fun main() {
     part1(input, 71, 1024).println()
     part2(input, 71, 1024).println()
 }
-
 
 data class PointWithSteps(val x: Int, val y: Int, val steps: Int)
